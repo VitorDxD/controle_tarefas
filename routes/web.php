@@ -12,6 +12,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/task', TaskController::class);
+
 Route::get('/test-message', function () {
-    return new MailTestMessage();
-});
+    $userMail = auth()->user()->email;
+
+    Mail::to($userMail)->send(new MailTestMessage());
+    return 'Email successfully sent!';
+})->middleware('auth');
