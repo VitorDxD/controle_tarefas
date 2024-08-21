@@ -35,7 +35,10 @@ class TaskController extends Controller
 
         $request->validate($configs, [], $names);
 
-        $task = Task::create($request->all());
+        $newTaskData = $request->all();
+        $newTaskData['user_id'] = auth()->user()->id;
+
+        $task = Task::create($newTaskData);
         $receiverEmail = auth()->user()->email;
         Mail::to($receiverEmail)->send(new NewTaskMail($task));
         
