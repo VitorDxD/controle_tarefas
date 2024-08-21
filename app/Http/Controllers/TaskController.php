@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
+use App\Mail\NewTaskMail;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -32,17 +34,17 @@ class TaskController extends Controller
         $names = ['limit_date' => 'limit date'];
 
         $request->validate($configs, [], $names);
+
         $task = Task::create($request->all());
+        $receiverEmail = auth()->user()->email;
+        Mail::to($receiverEmail)->send(new NewTaskMail($task));
         
         return redirect()->route('task.show', ['task' => $task->id]); 
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Task $task)
     {
-        dd($task->getAttributes());
+        return view('task.show', ['task' => $task]);
     }
 
     /**
