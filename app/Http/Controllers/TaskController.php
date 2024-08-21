@@ -12,28 +12,29 @@ class TaskController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         echo 'We got this far';
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('task.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $configs = [
+            'task' => 'string',
+            'limit_date' => 'date'
+        ];
+
+        $names = ['limit_date' => 'limit date'];
+
+        $request->validate($configs, [], $names);
+        $task = Task::create($request->all());
+        
+        return redirect()->route('task.show', ['task' => $task->id]); 
     }
 
     /**
@@ -41,7 +42,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        dd($task->getAttributes());
     }
 
     /**
