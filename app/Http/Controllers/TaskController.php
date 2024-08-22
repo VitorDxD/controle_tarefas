@@ -55,12 +55,10 @@ class TaskController extends Controller
         return view('task.show', ['task' => $task]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Task $task)
     {
-        //
+        return view('task.edit', ['task' => $task]);
     }
 
     /**
@@ -68,7 +66,17 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        $configs = [
+            'task' => 'string',
+            'limit_date' => 'date'
+        ];
+
+        $names = ['limit_date' => 'limit date'];
+
+        $request->validate($configs, [], $names);
+        $task->update($request->all());
+
+        return redirect()->route('task.show', ['task' => $task->id]); 
     }
 
     /**

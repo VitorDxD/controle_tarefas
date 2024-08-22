@@ -14,6 +14,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Task</th>
                                 <th scope="col">Limit Date</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
 
@@ -23,6 +24,7 @@
                                     <th scope="row">{{ $task->id }}</th>
                                     <td>{{ $task->task }}</td>
                                     <td>{{ date('d/m/Y', strtotime($task->limit_date)) }}</td>
+                                    <td><a href="{{ route('task.edit', ['task' => $task->id]) }}">Edit</a></td>
                                 </tr>
                             @empty
                                 <tr>You don't have tasks</tr>
