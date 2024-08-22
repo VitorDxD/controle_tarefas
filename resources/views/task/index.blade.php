@@ -18,15 +18,35 @@
                         </thead>
 
                         <tbody class="table-group-divider">
-                            @foreach ($tasks as $key => $task)                                
+                            @forelse ($tasks as $key => $task)                                
                                 <tr>
                                     <th scope="row">{{ $task['id'] }}</th>
                                     <td>{{ $task['task'] }}</td>
                                     <td>{{ date('d/m/Y', strtotime($task['limit_date'])) }}</td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>You don't have tasks</tr>
+                            @endforelse
                         </tbody>
                     </table>
+
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="{{ $tasks->previousPageUrl() }}">Previous</a></li>
+
+                            @for ($i = 1; $i <= $tasks->lastPage(); $i++)
+
+                                <li class="page-item {{ $tasks->currentPage() == $i ? 'active' : '' }}">
+                                    <a class="page-link" href={{ $tasks->url($i) }}>
+                                        {{ $i }}
+                                    </a>
+                                </li>
+
+                            @endfor
+
+                            <li class="page-item"><a class="page-link" href="{{ $tasks->nextPageUrl() }}">Next</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
