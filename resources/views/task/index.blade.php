@@ -18,11 +18,11 @@
                         </thead>
 
                         <tbody class="table-group-divider">
-                            @forelse ($tasks as $key => $task)                                
+                            @forelse ($tasks as $task)                                
                                 <tr>
-                                    <th scope="row">{{ $task['id'] }}</th>
-                                    <td>{{ $task['task'] }}</td>
-                                    <td>{{ date('d/m/Y', strtotime($task['limit_date'])) }}</td>
+                                    <th scope="row">{{ $task->id }}</th>
+                                    <td>{{ $task->task }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($task->limit_date)) }}</td>
                                 </tr>
                             @empty
                                 <tr>You don't have tasks</tr>
