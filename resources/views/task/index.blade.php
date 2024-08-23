@@ -5,7 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Tasks List</div>
+                <div class="card-header">
+                    Tasks List
+                    <a href="{{ route('task.create') }}" class="float-end">New Task +</a>
+                </div>
 
                 <div class="card-body">
                     <table class="table">
