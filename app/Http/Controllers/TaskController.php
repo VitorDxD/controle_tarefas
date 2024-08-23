@@ -58,6 +58,12 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
+        $userId = auth()->user()->id;
+
+        if (!($task->user_id == $userId)) {
+            return view('acess-denied');
+        }
+
         return view('task.edit', ['task' => $task]);
     }
 
@@ -74,6 +80,13 @@ class TaskController extends Controller
         $names = ['limit_date' => 'limit date'];
 
         $request->validate($configs, [], $names);
+
+        $userId = auth()->user()->id;
+
+        if (!($task->user_id == $userId)) {
+            return view('acess-denied');
+        }
+
         $task->update($request->all());
 
         return redirect()->route('task.show', ['task' => $task->id]); 
