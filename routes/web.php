@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Mail\MailTestMessage;
 
-/* Route::get('/', function () {
-    return view('welcome');
-}); */
+Route::get('/', function () {
+    //return view('welcome');
+    return redirect()->route('home');
+});
 
 Auth::routes(['verify' => true]);
 
