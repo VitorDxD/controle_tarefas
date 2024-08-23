@@ -15,6 +15,7 @@
                                 <th scope="col">Task</th>
                                 <th scope="col">Limit Date</th>
                                 <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
 
@@ -25,6 +26,13 @@
                                     <td>{{ $task->task }}</td>
                                     <td>{{ date('d/m/Y', strtotime($task->limit_date)) }}</td>
                                     <td><a href="{{ route('task.edit', ['task' => $task->id]) }}">Edit</a></td>
+                                    <td>
+                                        <form id="form_{{ $task->id }}" action="{{ route('task.destroy', ['task' => $task->id]) }}" method="post">
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
+                                        <a href="#" onclick="document.querySelector('#form_{{ $task->id }}').submit()">Delete</a>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>You don't have tasks</tr>

@@ -67,9 +67,6 @@ class TaskController extends Controller
         return view('task.edit', ['task' => $task]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Task $task)
     {
         $configs = [
@@ -88,15 +85,18 @@ class TaskController extends Controller
         }
 
         $task->update($request->all());
-
         return redirect()->route('task.show', ['task' => $task->id]); 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Task $task)
     {
-        //
+        $userId = auth()->user()->id;
+
+        if (!($task->user_id == $userId)) {
+            return view('acess-denied');
+        }
+
+        $task->delete();
+        return redirect()->route('task.index');
     }
 }
