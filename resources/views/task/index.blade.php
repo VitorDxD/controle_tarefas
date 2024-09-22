@@ -6,8 +6,18 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Tasks List
-                    <a href="{{ route('task.create') }}" class="float-end">New Task +</a>
+                    <div class="row">
+                        <div class="col-6">
+                            Tasks List
+                        </div>
+
+                        <div class="col-6 d-flex justify-content-end">
+                            <div>
+                                <a href="{{ route('task.export') }}" style="margin-right: 5px;">XLSX</a>
+                                <a href="{{ route('task.create') }}">New Task +</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-body">

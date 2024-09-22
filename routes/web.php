@@ -15,6 +15,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
     ->name('home')
     ->middleware('verified');
 
+
+Route::get('task/export', [App\Http\Controllers\TaskController::class, 'export'])
+    ->name('task.export');
 Route::resource('/task', TaskController::class)->middleware('verified');
 
 Route::get('/test-message', function () {
